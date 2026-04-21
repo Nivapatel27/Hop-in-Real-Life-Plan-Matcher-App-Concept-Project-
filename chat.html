@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hoppin Chat</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI";
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR (CHAT LIST) */
+.sidebar {
+    width: 30%;
+    background: #ffffff;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+.chat-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.chat-item:hover {
+    background: #f0f7ff;
+}
+
+/* CHAT AREA */
+.chat-area {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    background: #f4f8ff;
+}
+
+/* HEADER */
+.chat-header {
+    background: linear-gradient(135deg, #007BFF, #00A8FF);
+    color: white;
+    padding: 15px;
+}
+
+/* MESSAGES */
+.messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 60%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 15px;
+}
+
+/* MY MESSAGE */
+.me {
+    background: #007BFF;
+    color: white;
+    margin-left: auto;
+}
+
+/* OTHER */
+.other {
+    background: #e6e6e6;
+}
+
+/* INPUT */
+.input-area {
+    display: flex;
+    padding: 10px;
+    background: white;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+.input-area button {
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    background: #007BFF;
+    color: white;
+    border-radius: 20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- CHAT LIST -->
+<div class="sidebar">
+
+    <div class="chat-item" onclick="openChat('Coffee Group')">
+        ☕ Coffee Group
+    </div>
+
+    <div class="chat-item" onclick="openChat('Movie Night')">
+        🎬 Movie Night
+    </div>
+
+    <div class="chat-item" onclick="openChat('Anuj')">
+        👤 Anuj (Personal)
+    </div>
+
+</div>
+
+<!-- CHAT AREA -->
+<div class="chat-area">
+
+    <div class="chat-header" id="chatTitle">
+        Select a chat
+    </div>
+
+    <div id="messages" class="messages"></div>
+
+    <div class="input-area">
+        <input type="text" id="msg" placeholder="Type message...">
+        <button onclick="sendMsg()">Send</button>
+    </div>
+
+</div>
+
+<script>
+let currentChat = "";
+
+// OPEN CHAT
+function openChat(name) {
+    currentChat = name;
+    document.getElementById("chatTitle").innerText = name;
+    document.getElementById("messages").innerHTML = "";
+
+    let saved = JSON.parse(localStorage.getItem(name)) || [];
+
+    saved.forEach(m => {
+        addMessage(m.text, m.type);
+    });
+}
+
+// SEND MESSAGE
+function sendMsg() {
+    let input = document.getElementById("msg");
+    let text = input.value;
+
+    if(text === "" || currentChat === "") return;
+
+    addMessage(text, "me");
+
+    let messages = JSON.parse(localStorage.getItem(currentChat)) || [];
+    messages.push({text: text, type: "me"});
+    localStorage.setItem(currentChat, JSON.stringify(messages));
+
+    input.value = "";
+}
+
+// ADD MESSAGE TO UI
+function addMessage(text, type) {
+    let div = document.createElement("div");
+    div.className = "message " + type;
+    div.innerText = text;
+
+    document.getElementById("messages").appendChild(div);
+}
+</script>
+
+</body>
+</html>

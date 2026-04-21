@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Explore - Hoppin</title>
+<style>
+
+    .categories {
+    margin: 15px 0;
+}
+
+.categories button {
+    margin: 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #e6f0ff;
+    color: #007BFF;
+    cursor: pointer;
+}
+
+.categories button:hover {
+    background: #007BFF;
+    color: white;
+}
+body { font-family: Arial; background:#f4f8ff; margin:0; }
+
+header {
+    background:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+}
+
+nav a { margin-left:20px; text-decoration:none; color:#333; }
+
+.container {
+    max-width:1000px;
+    margin:auto;
+    padding:30px;
+}
+
+.card {
+    background:white;
+    padding:20px;
+    margin:15px 0;
+    border-radius:10px;
+}
+
+input {
+    width:100%;
+    padding:10px;
+    margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Hoppin</h2>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="index.html#create">Create</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Explore Plans</h2>
+<div class="categories">
+
+    <button onclick="filterPlans('all')">All</button>
+    <button onclick="filterPlans('movie')">🎬 Movie</button>
+    <button onclick="filterPlans('cafe')">☕ Café</button>
+    <button onclick="filterPlans('sports')">🏏 Sports</button>
+    <button onclick="filterPlans('hangout')">🎉 Hangout</button>
+</div>
+</div>
+    <input type="text" placeholder="Search plans...">
+
+    <div class="card">
+        <h3>☕ Coffee Meetup</h3>
+        <p>📍 Café</p>
+        <button>Join</button>
+        <div class="card" data-category="cafe"></div>
+    </div>
+
+    <div class="card">
+        <h3>🎬 Movie Night</h3>
+        <p>📍 Cinema</p>
+        <button>Join</button>
+        <div class="card" data-category="hangout"></div>
+    </div>
+    <div id="plans">
+
+    <div class="card" data-category="movie">
+        <h3>🎬 Movie Night</h3>
+        <p>📍 PVR Cinemas • 5 km</p>
+        <button>Join</button>
+    </div>
+
+    <div class="card" data-category="cafe">
+        <h3>☕ Coffee Meetup</h3>
+        <p>📍 Blue Tokai Café • 2 km</p>
+        <button>Join</button>
+    </div>
+
+    <div class="card" data-category="sports">
+        <h3>🏏 Cricket Match</h3>
+        <p>📍 Local Ground • 1 km</p>
+        <button>Join</button>
+    </div>
+
+    <div class="card" data-category="hangout">
+        <h3>🎉 Night Hangout</h3>
+        <p>📍 FC Road • 3 km</p>
+        <button>Join</button>
+    </div>
+
+    <div class="card" data-category="movie">
+        <h3>🍿 Marvel Movie Marathon</h3>
+        <p>📍 Home Theatre • 4 km</p>
+        <button>Join</button>
+    </div>
+
+    <div class="card" data-category="cafe">
+        <h3>📚 Study + Coffee</h3>
+        <p>📍 Starbucks • 2.5 km</p>
+        <button>Join</button>
+    </div>
+
+    <div class="card" data-category="sports">
+        <h3>🏸 Badminton Game</h3>
+        <p>📍 Sports Club • 2 km</p>
+        <button>Join</button>
+    </div>
+
+    <div class="card" data-category="hangout">
+        <h3>🎵 Jamming Session</h3>
+        <p>📍 Friend’s Place • 3 km</p>
+        <button>Join</button>
+    </div>
+
+</div>
+</div>
+<script>
+function filterPlans(category) {
+    let cards = document.querySelectorAll("#plans .card");
+
+    cards.forEach(card => {
+        let cat = card.getAttribute("data-category");
+
+        if(category === "all" || cat === category) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+</script>
+</div>
+
+</body>
+</html>
