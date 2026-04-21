@@ -17,6 +17,9 @@ To solve the problem of social disconnection by enabling users to easily find, j
 
 Many people struggle to make plans or find company for activities. Hopin aims to bridge this gap by providing a platform where users can discover and connect with others based on common interests and time availability.
 
+link
+ https://nivapatel27.github.io/Hop-in-Real-Life-Plan-Matcher-App-Concept-Project-/
+
 Tools & Skills Used
 
 * UI/UX Design Thinking
